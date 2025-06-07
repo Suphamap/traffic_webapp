@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Prediction Visualization</title>
+    <title>Traffic Prediction</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     <header>
-        <h1 class="animate__animated animate__fadeInDown">Traffic Prediction Visualization</h1>
         <nav>
-            <ul>
-                <li><a href="current_traffic.html" class="animate__animated animate__fadeInUp animate__delay-1s">Current Traffic</a></li>
-                <li><a href="prediction.html" class="animate__animated animate__fadeInUp animate__delay-2s">Prediction</a></li>
-                <li><a href="producer.html" class="animate__animated animate__fadeInUp animate__delay-3s">Producer</a></li>
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul id="nav-links">
+                <li><a href="#">ผู้บรรยาย</a></li>
+                <li><a href="#">กำหนดการ</a></li>
+                <li><a href="#">ข้อมูลติดต่อ</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <p class="animate__animated animate__fadeIn animate__delay-4s">Welcome to the traffic prediction visualizer. This application will display traffic predictions based on radar-based rainfall nowcasting data.</p>
-        <div id="map-container">
-            <!-- Map will be rendered here -->
-            <img src="https://via.placeholder.com/800x500.png?text=Map+Placeholder" alt="Map Placeholder">
-        </div>
-        <div id="controls">
-            <!-- Controls for time, etc. -->
-            <p>Controls placeholder</p>
-        </div>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Traffic</h1>
+                <h1>Prediction</h1>
+                <button>พยากรณ์เลย</button>
+            </div>
+        </section>
     </main>
-    <footer>
-        <p>&copy; 2025 Traffic Visualization App</p>
-    </footer>
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Added script tag -->
 </body>
 </html>

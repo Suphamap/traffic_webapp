@@ -1,6 +1,12 @@
-// Basic script file for future interactivity
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Traffic Visualization App Loaded');
-    // Future JavaScript code for map integration, data fetching, etc. will go here.
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navLinks.classList.toggle('active');
+        });
+    }
 });
