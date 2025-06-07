@@ -1,0 +1,107 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #eef1f5; /* Lighter gray background */
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #007bff; /* Professional blue */
+    color: #ffffff;
+    padding: 1.5em 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* Navigation Bar Styles */
+nav {
+    margin-top: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block; /* Changed from inline to inline-block for better spacing control */
+    margin: 0 15px; /* Adjusted margin */
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 8px 15px; /* Added padding for a button-like feel */
+    border-radius: 4px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+nav ul li a:hover,
+nav ul li a:focus { /* Added focus for accessibility */
+    background-color: #0056b3; /* Darker blue on hover/focus */
+    transform: translateY(-2px); /* Slight lift effect */
+    text-decoration: none; /* Ensure no underline on hover */
+}
+
+main {
+    padding: 2em;
+    max-width: 1200px; /* Max width for content */
+    margin: 20px auto; /* Center content */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+#map-container {
+    width: 100%;
+    height: 500px; /* Increased height */
+    background-color: #e9ecef; /* Light gray for map background */
+    margin-bottom: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ced4da;
+    border-radius: 4px; /* Rounded corners */
+    overflow: hidden; /* Ensure image fits */
+}
+
+#map-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Cover the container */
+    border-radius: inherit; /* Inherit border-radius from parent */
+}
+
+/* Animation for map and controls on hover - example */
+#map-container:hover, #controls:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+    transition: transform 0.3s ease-in-out;
+}
+
+#controls {
+    background-color: #f8f9fa; /* Lighter background for controls */
+    padding: 1.5em;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+footer {
+    text-align: center;
+    padding: 1.5em 0;
+    background-color: #343a40; /* Darker footer */
+    color: #f8f9fa; /* Light text for footer */
+    /* position: fixed; remove fixed positioning for better flow */
+    bottom: 0;
+    width: 100%;
+    margin-top: 30px; /* Space above footer */
+}
