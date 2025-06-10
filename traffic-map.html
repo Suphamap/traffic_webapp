@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Prediction - Real-time Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map-style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-header">
+                <div class="logo">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            <ul id="nav-links">
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="#">ผู้บรรยาย</a></li>
+                <li><a href="#">กำหนดการ</a></li>
+                <li><a href="#">ข้อมูลติดต่อ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="map-main">
+        <div class="map-container">
+            <div class="map-header">
+                <h1>การพยากรณ์การจราจรแบบเรียลไทม์</h1>
+                <div class="location-info">
+                    <div class="location-status" id="locationStatus">
+                        📍 แสดงตำแหน่งที่กำหนด
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-controls">
+                <button id="locateBtn" class="control-btn">
+                    <span>🔄</span> รีเฟรชแผนที่
+                </button>
+                <button id="trafficToggle" class="control-btn active">
+                    <span>🚦</span> แสดงการจราจร
+                </button>
+                <div class="map-type-selector">
+                    <select id="mapType">
+                        <option value="roadmap">แผนที่ถนน</option>
+                        <option value="satellite">ดาวเทียม</option>
+                        <option value="hybrid">ผสม</option>
+                        <option value="terrain">ภูมิประเทศ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="map" class="google-map"></div>
+            
+            <div class="map-legend">
+                <h3>คำอธิบายสีการจราจร</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color green"></span>
+                        <span>การจราจรคล่องตัว</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color yellow"></span>
+                        <span>การจราจรช้า</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color red"></span>
+                        <span>การจราจรติดขัด</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color dark-red"></span>
+                        <span>การจราจรติดขัดมาก</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <div class="error-content">
+                <h3>⚠️ เกิดข้อผิดพลาด</h3>
+                <p id="errorText"></p>
+                <button id="retryBtn" class="retry-btn">ลองใหม่</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="map-script.js"></script>
+    <!-- Replace YOUR_API_KEY with your actual Google Maps API Key -->
+    <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkKRD0ikyex_YOdDP55xQs1uYeqCS7F1o&callback=initMap&libraries=geometry">
+    </script>
+</body>
+</html>
