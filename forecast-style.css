@@ -434,7 +434,213 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Mobile Responsive */
+/* Status Section Styles */
+.status-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    margin: 60px auto;
+    max-width: 1200px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.status-section h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.status-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.status-header i {
+    font-size: 2rem;
+    margin-right: 15px;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.status-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.status-content {
+    color: white;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.status-dot.loading {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    animation: pulse 2s infinite;
+}
+
+.status-dot.good {
+    background: linear-gradient(45deg, #4ade80, #22c55e);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+}
+
+.status-dot.warning {
+    background: linear-gradient(45deg, #fbbf24, #f59e0b);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+
+.status-dot.danger {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+}
+
+.status-details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.status-details p {
+    margin: 5px 0;
+}
+
+.status-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.status-actions .btn {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.status-actions .btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.status-actions .btn.active {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Overall Status Banner */
+.overall-status-banner {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.status-summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.status-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.status-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.status-alert {
+    color: #ef4444;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
 @media (max-width: 768px) {
     .forecast-container {
         padding: 20px;
@@ -502,6 +708,53 @@
     .cta-buttons .btn {
         width: 100%;
         max-width: 300px;
+    }
+
+    .status-section {
+        padding: 25px 20px;
+        margin: 40px 15px;
+    }
+    
+    .status-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .status-card {
+        padding: 20px;
+    }
+    
+    .status-header i {
+        font-size: 1.5rem;
+    }
+    
+    .status-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .status-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .status-actions .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .overall-status-banner {
+        padding: 15px 20px;
+        margin-bottom: 30px;
+    }
+    
+    .status-summary {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .status-summary-item {
+        min-width: auto;
+        width: 100%;
     }
 }
 

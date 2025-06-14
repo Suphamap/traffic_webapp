@@ -74,12 +74,85 @@
             <div class="particle"></div>
             <div class="particle"></div>
         </div>
-        
-        <div class="forecast-container">
-            <div class="forecast-header">
-                <h1>การคาดการณ์จราจรล่วงหน้า</h1>
+            <!-- Status Section -->
+            <div class="status-section">
+                <h2><i class="bi bi-activity me-2"></i>สถานะปัจจุบัน</h2>
+                <div class="status-grid">
+                    <div class="status-card traffic-status">
+                        <div class="status-header">
+                            <i class="bi bi-car-front"></i>
+                            <h3>สถานะการจราจร</h3>
+                        </div>
+                        <div class="status-content">
+                            <div class="status-indicator" id="trafficStatus">
+                                <div class="status-dot loading"></div>
+                                <span id="trafficText">กำลังโหลด...</span>
+                            </div>
+                            <div class="status-details" id="trafficDetails">
+                                <p id="trafficLocation">ถนนพหลโยธิน มหาวิทยาลัยเกษตรศาสตร์</p>
+                                <p id="trafficTime">อัปเดตล่าสุด: --</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-card weather-status">
+                        <div class="status-header">
+                            <i class="bi bi-cloud-rain"></i>
+                            <h3>สภาพอากาศ</h3>
+                        </div>
+                        <div class="status-content">
+                            <div class="status-indicator" id="weatherStatus">
+                                <div class="status-dot loading"></div>
+                                <span id="weatherText">กำลังโหลด...</span>
+                            </div>
+                            <div class="status-details" id="weatherDetails">
+                                <p id="rainProbability">โอกาสฝนตก: --%</p>
+                                <p id="weatherTime">อัปเดตล่าสุด: --</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-card prediction-status">
+                        <div class="status-header">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <h3>การคาดการณ์</h3>
+                        </div>
+                        <div class="status-content">
+                            <div class="status-indicator" id="predictionStatus">
+                                <div class="status-dot loading"></div>
+                                <span id="predictionText">กำลังโหลด...</span>
+                            </div>
+                            <div class="status-details" id="predictionDetails">
+                                <p id="nextUpdate">อัปเดตถัดไป: 30 นาที</p>
+                                <p id="accuracy">ความแม่นยำ: 92%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-actions">
+                    <button class="btn btn-outline-light btn-sm" onclick="refreshStatus()">
+                        <i class="bi bi-arrow-clockwise me-1"></i>รีเฟรช
+                    </button>
+                    <button class="btn btn-outline-light btn-sm" onclick="toggleAutoRefresh()">
+                        <i class="bi bi-play-circle me-1" id="autoRefreshIcon"></i>
+                        <span id="autoRefreshText">เปิดการอัปเดตอัตโนมัติ</span>
+                    </button>
+                </div>
             </div>
-            
+
+        <div class="forecast-container">
+            <div class="demo-section">
+                <h2>การคาดการณ์จราจรล่วงหน้า 30 นาที</h2>
+                <!-- an actual video file -->
+                <div class="video-container">
+                    <video controls width="100%" height="400" poster="video-thumbnail.jpg" autoplay loop>
+                        <source src="traffic-prediction-demo.mp4" type="video/mp4">
+                        <p>เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ</p>
+                    </video>
+                </div>
+            </div>
+
             <div class="feature-cards">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -101,17 +174,6 @@
                     </div>
                     <h3>พื้นที่ศึกษา</h3>
                     <p>การพยากรณ์จราจร ถนนพหลโยธิน มหาวิทยาลัยเกษตรศาสตร์</p>
-                </div>
-            </div>
-
-            <div class="demo-section">
-                <h2>การคาดการณ์จราจรล่วงหน้า 30 นาที</h2>
-                <!-- an actual video file -->
-                <div class="video-container">
-                    <video controls width="100%" height="400" poster="video-thumbnail.jpg" autoplay loop>
-                        <source src="traffic-prediction-demo.mp4" type="video/mp4">
-                        <p>เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ</p>
-                    </video>
                 </div>
             </div>
 
