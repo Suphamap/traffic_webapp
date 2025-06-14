@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Prediction - Real-time Map</title>
+    <title>Traffic Prediction - คาดการณ์จราจรล่วงหน้า</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="map-style.css">
-
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="forecast-style.css">
+    <!-- Kanit Font -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
       html, body, * {
@@ -44,7 +40,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" href="traffic-forecast.html" data-bs-toggle="tooltip" title="พยากรณ์จราจรล่วงหน้า 30 นาที">
+                            <a class="nav-link active px-3" href="traffic-forecast.html" data-bs-toggle="tooltip" title="พยากรณ์จราจรล่วงหน้า 30 นาที">
                                 <i class="bi bi-graph-up me-1"></i>คาดการณ์จราจรล่วงหน้า
                             </a>
                         </li>
@@ -54,7 +50,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active px-3" href="traffic-map.html" data-bs-toggle="tooltip" title="ข้อมูลการจราจร ณ ปัจจุบัน">
+                            <a class="nav-link px-3" href="traffic-map.html" data-bs-toggle="tooltip" title="ข้อมูลการจราจร ณ ปัจจุบัน">
                                 <i class="bi bi-geo-alt me-1"></i>ข้อมูลการจราจร ณ ปัจจุบัน
                             </a>
                         </li>
@@ -69,7 +65,7 @@
         </nav>
     </header>
 
-    <main class="map-main">
+    <main class="forecast-main">
         <!-- Floating particles background -->
         <div class="particles">
             <div class="particle"></div>
@@ -79,58 +75,57 @@
             <div class="particle"></div>
         </div>
         
-        <div class="map-container">
-            <div class="map-header">
-                <h1>การพยากรณ์การจราจรแบบเรียลไทม์</h1>
+        <div class="forecast-container">
+            <div class="forecast-header">
+                <h1>การคาดการณ์จราจรล่วงหน้า</h1>
             </div>
             
-            <div class="map-controls">
-                <button id="locateBtn" class="control-btn">
-                    <span>🔄</span> รีเฟรชแผนที่
-                </button>
-                <button id="trafficToggle" class="control-btn active">
-                    <span>🚦</span> แสดงการจราจร
-                </button>
-                <div class="map-type-selector">
-                    <select id="mapType">
-                        <option value="roadmap">แผนที่ถนน</option>
-                        <option value="satellite">ดาวเทียม</option>
-                        <option value="hybrid">ผสม</option>
-                        <option value="terrain">ภูมิประเทศ</option>
-                    </select>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h3>การพยากรณ์แม่นยำ</h3>
+                    <p>ใช้เทคโนโลยี Machine Learning (CNN) ในการวิเคราะห์ข้อมูลจราจรและข้อมูลการพยากรณ์ฝนเรดาร์ เพื่อความแม่นยำสูง</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+                    <h3>คาดการณ์การจราจรล่วงหน้า 30 นาที</h3>
+                    <p>ให้ข้อมูลคาดการณ์ การจราจรล่วงหน้า 30 นาที เพื่อช่วยวางแผนการเดินทางอย่างมีประสิทธิภาพ</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h3>พื้นที่ศึกษา</h3>
+                    <p>การพยากรณ์จราจร ถนนพหลโยธิน มหาวิทยาลัยเกษตรศาสตร์</p>
                 </div>
             </div>
 
-            <div id="map" class="google-map"></div>
-            
-            <div class="map-legend">
-                <h3>คำอธิบายสีการจราจร</h3>
-                <div class="legend-items">
-                    <div class="legend-item">
-                        <span class="legend-color green"></span>
-                        <span>การจราจรคล่องตัว</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color yellow"></span>
-                        <span>การจราจรช้า</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color red"></span>
-                        <span>การจราจรติดขัด</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color dark-red"></span>
-                        <span>การจราจรติดขัดมาก</span>
-                    </div>
+            <div class="demo-section">
+                <h2>การคาดการณ์จราจรล่วงหน้า 30 นาที</h2>
+                <!-- an actual video file -->
+                <div class="video-container">
+                    <video controls width="100%" height="400" poster="video-thumbnail.jpg" autoplay loop>
+                        <source src="traffic-prediction-demo.mp4" type="video/mp4">
+                        <p>เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ</p>
+                    </video>
                 </div>
             </div>
-        </div>
 
-        <div class="error-message" id="errorMessage" style="display: none;">
-            <div class="error-content">
-                <h3>⚠️ เกิดข้อผิดพลาด</h3>
-                <p id="errorText"></p>
-                <button id="retryBtn" class="retry-btn">ลองใหม่</button>
+            <div class="cta-section">
+                <h2>พร้อมใช้งานแล้ว</h2>
+                <p>เริ่มใช้งานระบบคาดการณ์จราจรล่วงหน้าเพื่อวางแผนการเดินทางที่ดีขึ้น</p>
+                <div class="cta-buttons">
+                    <a href="traffic-map.html" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold me-3">
+                        <i class="bi bi-geo-alt-fill me-2"></i>ดูแผนที่จราจร
+                    </a>
+                    <a href="#demo" class="btn btn-outline-primary btn-lg rounded-pill px-5 py-3 fw-bold">
+                        <i class="bi bi-play-circle me-2"></i>ดูการสาธิต
+                    </a>
+                </div>
             </div>
         </div>
     </main>
@@ -138,11 +133,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-    <script src="map-script.js"></script>
-    <!-- Replace YOUR_API_KEY with your actual Google Maps API Key -->
-    <script async defer 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkKRD0ikyex_YOdDP55xQs1uYeqCS7F1o&callback=initMap&libraries=geometry">
-    </script>
+    <script src="forecast-script.js"></script>
     <script>
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

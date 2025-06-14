@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Prediction - Real-time Map</title>
+    <title>Traffic Prediction - ข้อมูลเรดาร์ ณ ปัจจุบัน</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="map-style.css">
-
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="radar-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
       html, body, * {
@@ -49,12 +44,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" href="traffic-radar.html" data-bs-toggle="tooltip" title="ข้อมูลเรดาร์ ณ ปัจจุบัน">
+                            <a class="nav-link active px-3" href="traffic-radar.html" data-bs-toggle="tooltip" title="ข้อมูลเรดาร์ ณ ปัจจุบัน">
                                 <i class="bi bi-radar me-1"></i>ข้อมูลเรดาร์ ณ ปัจจุบัน
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active px-3" href="traffic-map.html" data-bs-toggle="tooltip" title="ข้อมูลการจราจร ณ ปัจจุบัน">
+                            <a class="nav-link px-3" href="traffic-map.html" data-bs-toggle="tooltip" title="ข้อมูลการจราจร ณ ปัจจุบัน">
                                 <i class="bi bi-geo-alt me-1"></i>ข้อมูลการจราจร ณ ปัจจุบัน
                             </a>
                         </li>
@@ -69,7 +64,7 @@
         </nav>
     </header>
 
-    <main class="map-main">
+    <main class="radar-main">
         <!-- Floating particles background -->
         <div class="particles">
             <div class="particle"></div>
@@ -79,70 +74,30 @@
             <div class="particle"></div>
         </div>
         
-        <div class="map-container">
-            <div class="map-header">
-                <h1>การพยากรณ์การจราจรแบบเรียลไทม์</h1>
-            </div>
-            
-            <div class="map-controls">
-                <button id="locateBtn" class="control-btn">
-                    <span>🔄</span> รีเฟรชแผนที่
-                </button>
-                <button id="trafficToggle" class="control-btn active">
-                    <span>🚦</span> แสดงการจราจร
-                </button>
-                <div class="map-type-selector">
-                    <select id="mapType">
-                        <option value="roadmap">แผนที่ถนน</option>
-                        <option value="satellite">ดาวเทียม</option>
-                        <option value="hybrid">ผสม</option>
-                        <option value="terrain">ภูมิประเทศ</option>
-                    </select>
-                </div>
+        <div class="radar-container">
+            <div class="radar-header">
+                <h1>ข้อมูลเรดาร์ ณ ปัจจุบัน</h1>
             </div>
 
-            <div id="map" class="google-map"></div>
-            
-            <div class="map-legend">
-                <h3>คำอธิบายสีการจราจร</h3>
-                <div class="legend-items">
-                    <div class="legend-item">
-                        <span class="legend-color green"></span>
-                        <span>การจราจรคล่องตัว</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color yellow"></span>
-                        <span>การจราจรช้า</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color red"></span>
-                        <span>การจราจรติดขัด</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color dark-red"></span>
-                        <span>การจราจรติดขัดมาก</span>
+            <div class="demo-section">
+                <h2>ภาพแสดงฝนเรดาร์</h2>
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div class="image-content">
+                            <img src="radar1.png" alt="Radar Image" class="img-fluid">
+                            <div class="image-overlay">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="error-message" id="errorMessage" style="display: none;">
-            <div class="error-content">
-                <h3>⚠️ เกิดข้อผิดพลาด</h3>
-                <p id="errorText"></p>
-                <button id="retryBtn" class="retry-btn">ลองใหม่</button>
-            </div>
+            </div> 
         </div>
     </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-    <script src="map-script.js"></script>
-    <!-- Replace YOUR_API_KEY with your actual Google Maps API Key -->
-    <script async defer 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkKRD0ikyex_YOdDP55xQs1uYeqCS7F1o&callback=initMap&libraries=geometry">
-    </script>
+    <script src="radar-script.js"></script>
     <script>
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

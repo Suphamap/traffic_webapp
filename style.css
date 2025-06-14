@@ -20,6 +20,11 @@ main { /* ADDED */
     flex-grow: 1; /* Ensures main content pushes footer down */
 }
 
+/* CSS custom properties for mobile viewport */
+:root {
+    --vh: 1vh;
+}
+
 /* Custom Bootstrap navbar styles */
 .navbar-brand {
     font-size: 1.5rem;
@@ -118,19 +123,40 @@ main { /* ADDED */
 }
 
 .hero {
-    background-image: url('traffic-background.jpg'); /* Replace with your background image */
+    background-image: url('traffic-background.jpg');
     background-size: cover;
     background-position: center;
-    /* height: 100vh; CHANGED to min-height */
-    min-height: 100vh; /* MODIFIED */
-    box-sizing: border-box; /* ADDED */
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #fff;
-    width: 100%; /* ADDED for good measure */
-    padding-top: 80px; /* Added padding for Bootstrap navbar */
+    width: 100%;
+    padding: 80px 20px 20px 20px; /* Added horizontal padding for mobile */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay for better text readability */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    padding: 0 15px;
 }
 
 /* Added animation for hero content */
@@ -150,11 +176,12 @@ main { /* ADDED */
 }
 
 .hero-content h1 {
-    font-size: 6rem; /* Increased font size */
+    font-size: clamp(2.5rem, 8vw, 6rem); /* Responsive font size */
     margin: 0.5rem 0;
     font-weight: bold;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow */
+    line-height: 1.1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    word-break: keep-all;
 }
 
 .hero-content a {
@@ -201,140 +228,410 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    header {
-        background-color: rgba(0, 0, 0, 0.95); /* Darker background for better visibility */
-        padding: 0.75rem 20px; /* Slightly more padding for better touch area */
-        backdrop-filter: blur(10px); /* Modern blur effect */
-        -webkit-backdrop-filter: blur(10px); /* Safari support */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    }
-
-    nav {
-        flex-direction: column; /* Stack vertically on mobile */
-        align-items: flex-start;
-        width: 100%;
-        position: relative;
-    }
-
-    .nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .nav-toggle {
-        display: block; /* Show hamburger on mobile */
-        padding: 10px; /* Better touch target */
-        z-index: 1001;
-        transition: transform 0.3s ease;
-    }
-
-    .nav-toggle:hover {
-        transform: scale(1.1); /* Subtle hover effect */
-    }
-
-    nav ul {
-        display: none; /* Hide nav links by default on mobile */
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 0 0 15px 15px;
-        padding: 20px 0;
-        margin: 0;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        animation: slideDown 0.3s ease-out;
-    }
-
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    nav ul.active { /* Style for when nav is open */
-        display: flex;
-    }
-
-    nav ul li {
-        opacity: 0;
-        animation: fadeInUp 0.3s ease-out forwards;
-    }
-
-    nav ul li:nth-child(1) { animation-delay: 0.1s; }
-    nav ul li:nth-child(2) { animation-delay: 0.2s; }
-    nav ul li:nth-child(3) { animation-delay: 0.3s; }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    nav ul li a {
-        display: block;
-        padding: 15px 30px; /* Larger touch targets */
-        font-size: 1.1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-
-    nav ul li:last-child a {
-        border-bottom: none;
-    }
-
-    nav ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        transform: translateX(5px);
-    }
-
-    .logo img {
-        height: 50px; /* Smaller logo for mobile - current */
-        /* If header padding is 0.5rem (8px) top/bottom, total header height approx 50 + 16 = 66px */
-    }
-
     .hero {
-        /* padding-top: 20px; MODIFIED below */
-        padding-top: 70px; /* MODIFIED: to make space for the fixed header (approx 66px actual height) */
-        /* min-height: 100vh; and box-sizing: border-box are inherited */
+        background-attachment: scroll; /* Better performance on mobile */
+        padding: 60px 15px 20px 15px;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .hero-content {
+        padding: 0;
+        width: 100%;
     }
 
     .hero-content h1 {
-        font-size: 3.5rem; /* Smaller heading for mobile */
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        margin: 0.3rem 0;
+        line-height: 1.1;
     }
 
-    .hero-content button {
+    .hero-content .btn {
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
+        margin-top: 1.5rem;
+        width: auto;
+        min-width: 250px;
     }
 
-    /* header was position: static; - this rule is now removed from above */
-    /* .hero padding-top was 20px - this rule is now modified above */
+    /* Enhanced navbar for mobile */
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-brand img {
+        height: 40px;
+    }
 }
 
 @media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2.5rem; /* Even smaller heading for very small screens */
+    .hero {
+        padding: 60px 10px 15px 10px;
     }
 
-    nav ul li a {
+    .hero-content h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin: 0.2rem 0;
+    }
+
+    .hero-content .btn {
         font-size: 0.9rem;
+        padding: 0.75rem 1.25rem;
+        min-width: 220px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .navbar-brand img {
+        height: 35px;
+    }
+}
+
+/* Landscape phone fix */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding: 60px 20px 20px 20px;
+        align-items: flex-start;
+        padding-top: 80px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+        margin: 0.2rem 0;
+    }
+    
+    .hero-content .btn {
+        margin-top: 1rem;
+    }
+}
+
+/* Enhanced mobile navigation styles */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        margin-top: 15px;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .navbar-nav {
+        gap: 5px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 15px 20px !important;
+        margin: 3px 0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateX(8px);
+        color: #fff !important;
+    }
+    
+    .navbar-nav .nav-link.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .navbar-nav .nav-link.active:hover {
+        transform: translateX(8px) scale(1.02);
+    }
+    
+    .navbar-nav .nav-link i {
+        margin-right: 12px !important;
+        font-size: 1.2rem;
+        min-width: 24px;
+    }
+    
+    /* Enhanced mobile toggler */
+    .navbar-toggler {
+        border: none !important;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+    }
+    
+    .navbar-toggler-icon {
+        background-image: none;
+    }
+    
+    /* Animation for collapse */
+    .navbar-collapse.collapsing {
+        transition: height 0.3s ease;
+    }
+    
+    .navbar-collapse.show {
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Enhanced desktop navigation */
+@media (min-width: 992px) {
+    .navbar-nav .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+        border-radius: 1px;
+    }
+    
+    .navbar-nav .nav-link:hover::after {
+        width: 80%;
+    }
+    
+    .navbar-nav .nav-link.active::after {
+        width: 100%;
+        height: 3px;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: rgba(255, 255, 255, 0.9) !important;
+        transform: translateY(-2px);
+    }
+    
+    .navbar-nav .nav-link.active {
+        color: #fff !important;
+        font-weight: 600;
+    }
+}
+
+/* Improved navbar brand */
+.navbar-brand {
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar-brand img {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.navbar-brand:hover img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Fix for tooltip positioning on mobile */
+@media (max-width: 767.98px) {
+    .tooltip {
+        font-size: 0.875rem;
+    }
+}
+
+/* Loading state for navigation links */
+.nav-link.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.nav-link.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Additional mobile optimizations and fixes */
+/* Ensure proper touch targets for mobile */
+@media (max-width: 767.98px) {
+    .navbar-nav .nav-link {
+        min-height: 48px; /* Minimum touch target size */
+        display: flex;
+        align-items: center;
+        padding: 12px 20px !important;
+    }
+    
+    .btn {
+        min-height: 48px;
+        padding: 12px 24px;
+    }
+    
+    /* Prevent zoom on input focus on iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+    
+    /* Improve scrolling performance */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Better tap highlighting */
+    a, button, .btn, .nav-link {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Fix for viewport height on mobile browsers */
+@supports (height: 100dvh) {
+    .hero {
+        min-height: 100dvh;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    }
+    
+    /* Fix for Safari bottom bar */
+    @media screen and (max-width: 767px) {
+        .hero {
+            min-height: -webkit-fill-available;
+        }
+    }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (max-width: 767px) {
+    /* Fix for Chrome mobile address bar */
+    .hero {
+        min-height: calc(100vh - 56px); /* Chrome address bar height */
+    }
+}
+
+/* Improved accessibility for mobile */
+@media (max-width: 767.98px) {
+    /* Better focus indicators for keyboard navigation */
+    .navbar-nav .nav-link:focus,
+    .btn:focus {
+        outline: 2px solid #ffffff;
+        outline-offset: 2px;
+    }
+    
+    /* Ensure readable text on mobile */
+    body {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    
+    /* Better contrast for mobile readability */
+    .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 767.98px) {
+    /* Disable expensive effects on mobile */
+    .hero {
+        background-attachment: scroll !important;
+    }
+    
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* Optimize fonts for mobile */
+    body {
+        text-rendering: optimizeSpeed;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Fix for sticky navbar on mobile */
+@media (max-width: 767.98px) {
+    .navbar.fixed-top {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1030;
+    }
+}
+
+/* Landscape orientation fixes */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .hero-content h1 {
+        font-size: 2rem;
+        line-height: 1.1;
+        margin: 0.2rem 0;
+    }
+    
+    .hero-content .btn {
+        margin-top: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Use custom property for hero height on mobile */
+@media (max-width: 767.98px) {
+    .hero {
+        min-height: calc(var(--vh, 1vh) * 100);
     }
 }
