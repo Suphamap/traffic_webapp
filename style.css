@@ -20,94 +20,37 @@ main { /* ADDED */
     flex-grow: 1; /* Ensures main content pushes footer down */
 }
 
-header {
-    background: transparent;
-    color: #fff;
-    padding: 1rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+/* Custom Bootstrap navbar styles */
+.navbar-brand {
+    font-size: 1.5rem;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    flex-direction: row; /* Default to row layout */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0 2px;
 }
 
-.nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: auto; /* Auto width on desktop */
+.navbar-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
 }
 
-@media (min-width: 769px) {
-    .nav-header {
-        width: auto;
-    }
-    
-    nav {
-        flex-direction: row;
-    }
-    
-    nav ul {
-        display: flex !important; /* Always show on desktop */
-        position: static;
-        background: none;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        animation: none;
-    }
-    
-    nav ul li {
-        opacity: 1;
-        animation: none;
-    }
-    
-    nav ul li a {
-        padding: 0;
-        border-bottom: none;
-        font-size: inherit;
-        text-align: left;
-    }
-    
-    nav ul li a:hover {
-        background: none;
-        transform: none;
-    }
+.navbar-nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.logo img {
-    height: 70px;
+.navbar-toggler {
+    padding: 0.25rem 0.5rem;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
+.navbar-toggler:focus {
+    box-shadow: none;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Added for hover effect */
-}
-
-nav ul li a:hover { /* Added hover effect */
-    color: #ddd;
-}
+/* Note: Old hamburger menu styles below are now replaced by Bootstrap navigation */
+/* These styles can be removed in future cleanup as they're no longer used */
 
 /* Hamburger Menu Styles */
 .nav-toggle {
@@ -187,6 +130,7 @@ nav ul li a:hover { /* Added hover effect */
     text-align: center;
     color: #fff;
     width: 100%; /* ADDED for good measure */
+    padding-top: 80px; /* Added padding for Bootstrap navbar */
 }
 
 /* Added animation for hero content */

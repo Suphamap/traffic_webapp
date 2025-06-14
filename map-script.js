@@ -40,7 +40,6 @@ function initMap() {
 
 // Add marker at default location
 function addDefaultLocationMarker() {
-    const locationStatus = document.getElementById('locationStatus');
     const defaultLocation = { lat: 13.8519, lng: 100.5725 };
     
     // Add location marker
@@ -58,10 +57,6 @@ function addDefaultLocationMarker() {
         },
         animation: google.maps.Animation.DROP
     });
-
-    // Update location status
-    locationStatus.innerHTML = '📍 แสดงตำแหน่งที่กำหนด';
-    locationStatus.className = 'location-status success';
     
     // Add info window
     const infoWindow = new google.maps.InfoWindow({
@@ -84,21 +79,10 @@ function addDefaultLocationMarker() {
 
 // Get user's current location (removed functionality)
 function getCurrentLocation() {
-    const locationStatus = document.getElementById('locationStatus');
-    
     // Just refresh the default location
-    locationStatus.innerHTML = '<span class="loading-spinner"></span> กำลังรีเฟรชแผนที่...';
-    locationStatus.className = 'location-status';
-    
-    // Simulate loading time
-    setTimeout(() => {
-        const defaultLocation = { lat: 13.8519, lng: 100.5725 };
-        map.setCenter(defaultLocation);
-        map.setZoom(15);
-        
-        locationStatus.innerHTML = '📍 แสดงตำแหน่งที่กำหนด';
-        locationStatus.className = 'location-status success';
-    }, 1000);
+    const defaultLocation = { lat: 13.8519, lng: 100.5725 };
+    map.setCenter(defaultLocation);
+    map.setZoom(15);
 }
 
 // Show error message

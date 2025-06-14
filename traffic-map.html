@@ -4,38 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic Prediction - Real-time Map</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="map-style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="nav-header">
-                <div class="logo">
-                    <img src="logo.png" alt="Logo">
-                </div>
-                <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">
-                    <span class="hamburger"></span>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="logo.png" alt="Logo" height="50" class="me-2">
+                    <span class="fw-bold">Traffic Prediction</span>
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-1"></i>
                 </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="index.html" data-bs-toggle="tooltip" title="กลับสู่หน้าหลัก">
+                                <i class="bi bi-house me-1"></i>หน้าหลัก
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="#" data-bs-toggle="tooltip" title="ข้อมูลผู้บรรยาย">
+                                <i class="bi bi-person-circle me-1"></i>ผู้บรรยาย
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="#" data-bs-toggle="tooltip" title="ตารางกำหนดการ">
+                                <i class="bi bi-calendar-event me-1"></i>กำหนดการ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="#" data-bs-toggle="tooltip" title="ติดต่อเรา">
+                                <i class="bi bi-envelope me-1"></i>ข้อมูลติดต่อ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul id="nav-links">
-                <li><a href="index.html">หน้าหลัก</a></li>
-                <li><a href="#">ผู้บรรยาย</a></li>
-                <li><a href="#">กำหนดการ</a></li>
-                <li><a href="#">ข้อมูลติดต่อ</a></li>
-            </ul>
         </nav>
     </header>
 
     <main class="map-main">
+        <!-- Floating particles background -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
         <div class="map-container">
             <div class="map-header">
                 <h1>การพยากรณ์การจราจรแบบเรียลไทม์</h1>
-                <div class="location-info">
-                    <div class="location-status" id="locationStatus">
-                        📍 แสดงตำแหน่งที่กำหนด
-                    </div>
-                </div>
             </div>
             
             <div class="map-controls">
@@ -89,11 +119,20 @@
         </div>
     </main>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
     <script src="map-script.js"></script>
     <!-- Replace YOUR_API_KEY with your actual Google Maps API Key -->
     <script async defer 
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkKRD0ikyex_YOdDP55xQs1uYeqCS7F1o&callback=initMap&libraries=geometry">
+    </script>
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 </body>
 </html>
